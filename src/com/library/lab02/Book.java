@@ -9,6 +9,7 @@ public class Book {
     private double price;
     private String status;
     private LocalDate returnDate;
+    private Member whoBook;
 
     public Book(String title,String author,String isbn,double price,String status){
         this.title=title;
@@ -66,6 +67,7 @@ public class Book {
         this.returnDate = returnDate;
     }
 
+
     public void displayDetails(){
         System.out.println(" -Title: "+title);
         System.out.println(" -Author: "+author);
@@ -75,13 +77,24 @@ public class Book {
         System.out.println(" -Return Due Date: N/A (Book is available)");
         System.out.println();
     }
-    public void checkOut(){
+    public void checkOut(Member member){
         if ("Borrowed".equalsIgnoreCase(this.status)){
-            System.out.println(" Error: Book '"+this.title+"' is already borrowed and cannot be checked out again.");
+            System.out.println("Error: Book '"+this.title+"' is already borrowed and cannot be checked out again.");
             return;
         }
+        if (member.getBookLimit() == 3){
+//            Member Somsak has reached the borrow limit (3).
+            System.out.println("Member "+member.getMemberName()+" has reached the borrow limit (3).");
+            return;
+        }else {
+            member.setBookLimit(member.getBookLimit()+1);
+        }
+        this.whoBook= member;
         System.out.println("Book '"+title+"' has been checked out successfully.");
         this.status = "Borrowed";
+//        Book Java Programming has been borrowed by Somsak.
+        System.out.println("Book "+title+" has been borrowed by "+member.getMemberName()+".");
+//        Return Due Date: 2026-02-04
         this.returnDate = LocalDate.now().plusDays(14);
         System.out.println("Return Due Date: "+this.returnDate);
     }
@@ -91,6 +104,7 @@ public class Book {
     }
 
     public void returnBook(){
+        whoBook.setBookLimit(whoBook.getBookLimit()-1);
         this.status="Available";
     }
 }

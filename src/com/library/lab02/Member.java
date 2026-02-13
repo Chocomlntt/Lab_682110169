@@ -3,8 +3,11 @@ package com.library.lab02;
 public class Member {
     private String memberID;
     private String memberName;
+    private int bookLimit=0;
 
-    public Member(String m001, String somsak) {
+    public Member(String memberID, String memberName) {
+        this.memberID=memberID;
+        this.memberName=memberName;
     }
 
     public String getMemberID() {
@@ -21,5 +24,13 @@ public class Member {
 
     public void setMemberName(String memberName) {
         this.memberName = memberName;
+    }
+
+    public int getBookLimit() {
+        return bookLimit;
+    }
+
+    public void setBookLimit(int bookLimit) {
+        this.bookLimit = bookLimit;
     }
 }
