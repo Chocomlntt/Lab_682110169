@@ -15,4 +15,13 @@ public class Archer extends Characters {
     public void setAccuracy(double accuracy) {
         this.accuracy = accuracy;
     }
+
+    @Override
+    public void attack(Characters taget){
+        if(Math.random()>accuracy){
+            System.out.println("Miss");
+        }else {
+            super.attack(taget);
+        }
+    }
 }

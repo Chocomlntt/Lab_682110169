@@ -95,22 +95,19 @@ public class Characters {
     }
 
     public void displayCharacterDetails(){
-//        --- ARTHUR ---
         System.out.println("\n      --- "+name+" ---");
-//        Class: Warrior
         System.out.println("Class: "+charactersclass);
-//        Status: Active
         System.out.println("Status: "+status);
-//        Level: 10
         System.out.println("Level: "+level);
-//        Health Points: 1500/1500
         System.out.println("Health Points: "+healthPoints+"/"+maxHealthPoints);
-//        Damage: 20
         System.out.println("Damage: "+damage);
-//        Defense: 10
         System.out.println("Defense: "+defense);
-//        Weapon: Sword (Type: Melee, Damage: 25, Ability: Slash Attack)
+        anotherDetails();
         System.out.println("Weapon: "+weapon);
+    }
+
+    public void anotherDetails(){
+
     }
 
     public void attack(Characters taget){
@@ -120,31 +117,26 @@ public class Characters {
         }
 //        Arthur (Warrior) attacks Merlin with Sword!
         System.out.println(name+" ("+charactersclass+") attacks "+taget.getName()+" with "+weapon.getName()+"!");
-//        Raw Attack Damage: 45
         System.out.println("Raw Attack Damage: "+(damage+weapon.getBaseDamage()));
-//        Merlin's Defense: 5 (reduces damage by 5)
         System.out.println(taget.getName()+"'s Defense: "+taget.getDefense()+" (reduces damage by "+taget.getDefense()+")");
-//        Actual Damage Taken: 40
-        System.out.println("Actual Damage Taken: "+((damage+weapon.getBaseDamage())-taget.getDefense()));
-//        Merlin's HP: 760/800
-        taget.setHealthPoints(taget.getHealthPoints()-((damage+weapon.getBaseDamage())-taget.getDefense()));
-        if (taget.getHealthPoints()<0){
-            taget.setHealthPoints(0);
-        }
-        System.out.println(taget.getName()+"'s HP: "+taget.getHealthPoints()+"/"+taget.getMaxHealthPoints());
-
+        double finaldamage = (damage+weapon.getBaseDamage())-taget.getDefense();
+        System.out.println("Actual Damage Taken: "+(finaldamage));
+        taget.receiveDamage(finaldamage);
     }
 
     public void levelUp(){
-//        Arthur leveled up to Level 11!
         System.out.println(name+" leveled up to Level "+(level++));
         maxHealthPoints+=10;
         healthPoints=maxHealthPoints;
-//            Max Health increased to 1510 (full heal applied)
         System.out.println("Max Health increased to "+maxHealthPoints+" (full heal applied)");
     }
 
     public void receiveDamage(double amount){
+        healthPoints-=amount;
+        if (healthPoints<=0){
+            healthPoints=0;
+        }
+        System.out.println(name+"'s HP: "+healthPoints+"/"+maxHealthPoints);
     }
 
 }
