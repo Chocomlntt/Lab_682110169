@@ -38,6 +38,11 @@ public class LibraryManagementApp {
 //            item.displayDetails();
 //        }
         for (LibraryItem item : allItems) {
+            if (item instanceof PhysicalBook){
+                System.out.println("📚 PHYSICAL BOOK");
+            } else if (item instanceof EBook) {
+                System.out.println("💻 E-BOOK");
+            }
             item.displayDetails();
         }
 // Demonstrate checkOut() method
@@ -66,6 +71,11 @@ public class LibraryManagementApp {
 // Final display using polymorphism
         System.out.println("\n--- FINAL LIBRARY STATUS (Polymorphism Demo) ---");
         for (LibraryItem item : allItems) {
+            if (item instanceof PhysicalBook){
+                System.out.println("📚 PHYSICAL BOOK");
+            } else if (item instanceof EBook) {
+                System.out.println("💻 E-BOOK");
+            }
             item.displayDetails();
         }
 // ==================== METHOD OVERRIDING: Late Fee Demo ====================

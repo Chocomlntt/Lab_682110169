@@ -20,6 +20,7 @@ public class PhysicalBook extends LibraryItem {
 
     @Override
     public void displayDetails(){
+        super.displayDetails();
         System.out.println(" -ShelfLocation: "+shelfLocation);
         System.out.println();
     }

@@ -73,9 +73,13 @@ public class LibraryItem {
         System.out.println(" -Author: "+author);
         System.out.println(" -isbn: "+isbn);
         System.out.println(" -Price: "+price);
-        System.out.println(" -Status: "+title);
-        System.out.println(" -Return Due Date: N/A (Book is available)");
-        System.out.println();
+        System.out.println(" -Status: "+status);
+        if (status.equalsIgnoreCase("Available")){
+            System.out.println(" -Return Due Date: N/A (Book is available)");
+        } else {
+            System.out.println(" -Return Due Date: "+returnDate);
+        }
+
     }
     public void checkOut(Member member){
         if ("Borrowed".equalsIgnoreCase(this.status)){
@@ -100,7 +104,7 @@ public class LibraryItem {
     }
 
     public double calculateLateFee(int daylate){
-        return 0.0;
+        return daylate * 5;
     }
 
     public void printSummary(){
@@ -110,5 +114,6 @@ public class LibraryItem {
     public void returnItem(){
         whoBook.setBookLimit(whoBook.getBookLimit()-1);
         this.status="Available";
+        System.out.println("Item '"+title+"' has been returned successfully.");
     }
 }

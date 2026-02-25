@@ -28,6 +28,7 @@ public class EBook extends LibraryItem {
 
     @Override
     public void displayDetails(){
+        super.displayDetails();
         System.out.println(" -DownloadUrl: "+downloadUrl);
         System.out.println(" -FileSize: "+fileSize);
         System.out.println();
