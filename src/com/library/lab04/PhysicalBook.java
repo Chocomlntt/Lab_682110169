@@ -24,7 +24,9 @@ public class PhysicalBook extends LibraryItem implements Taxable{
     }
 
     @Override
-    public void calculateTax() {
-
+    public double calculateTax() {
+        double price = getPrice();
+        double taxRate = 0.07;
+        return price*taxRate;
     }
 }

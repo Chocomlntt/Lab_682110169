@@ -98,8 +98,8 @@ public class LibraryManagementApp {
         // Create a list for DigitalContent items (can contain both EBooks and Movies!)
         List<DigitalContent> digitalContent = new ArrayList<>();
         // Add movies (NOTE: Movies do NOT inherit from LibraryItem!)
-        LibraryMovie movie1 = new LibraryMovie("The Matrix", "Lana Wachowski", "https://streaming.library.com/matrix.mp4", 136, 1999, "Sci-Fi", 199.0);
-        LibraryMovie movie2 = new LibraryMovie("Inception", "Christopher Nolan", "https://streaming.library.com/inception.mp4", 148, 2010, "Sci-Fi/Thriller", 249.0);
+        LibraryMovie movie1 = new LibraryMovie("The Matrix", "Lana Wachowski", "https://streaming.library.com/matrix.mp4", 1999, "Sci-Fi", 199.0);
+        LibraryMovie movie2 = new LibraryMovie("Inception", "Christopher Nolan", "https://streaming.library.com/inception.mp4", 2010, "Sci-Fi/Thriller", 249.0);
 // Add them to the digital content list
         digitalContent.add(movie1);
         digitalContent.add(movie2);

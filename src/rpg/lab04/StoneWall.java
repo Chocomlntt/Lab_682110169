@@ -46,16 +46,29 @@ public class StoneWall implements Destructible {
     }
 
     public void displayWallDetails() {
+        System.out.println("\n      --- "+location+" ---");
+        System.out.println("Durability: "+durability+"/"+maxDurability);
+        System.out.println("Type: "+type);
     }
 
     @Override
     public void receiveDamage(double amount) {
-
+        setDurability(getDurability()-amount);
+        if (getDurability()<=0){
+            setDurability(0);
+            isDestroyed();
+            System.out.println("Can't attack destroyed "+getLocation());
+        }
+        System.out.println(location+"'s Durability: "+durability+"/"+maxDurability);
     }
 
     @Override
     public boolean isDestroyed() {
-        return false;
+        if (getDurability()<=0) {
+            return true;
+        }else {
+            return false;
+        }
     }
 
     @Override

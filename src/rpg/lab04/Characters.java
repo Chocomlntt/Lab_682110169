@@ -111,16 +111,22 @@ public class Characters implements Destructible {
     }
 
     public void attack(Destructible taget){
-        if (taget.getHealthPoints()<=0){
-            System.out.println("Can't attack die character");
-            return;
+        double rawdamage = (damage + weapon.getBaseDamage());
+        if (taget instanceof Characters) {
+            if (((Characters) taget).getHealthPoints() <= 0) {
+                System.out.println("Can't attack die character");
+                return;
+            }
+            System.out.println(name + " (" + charactersclass + ") attacks " + ((Characters) taget).getName() + " with " + weapon.getName() + "!");
+            System.out.println("Raw Attack Damage: " + (damage + weapon.getBaseDamage()));
+            System.out.println(((Characters) taget).getName() + "'s Defense: " + ((Characters) taget).getDefense() + " (reduces damage by " + ((Characters) taget).getDefense() + ")");
+            double finaldamage = (damage + weapon.getBaseDamage()) - ((Characters) taget).getDefense();
+            System.out.println("Actual Damage Taken: " + (finaldamage));
+            taget.receiveDamage(finaldamage);
+        } else {
+            taget.receiveDamage(rawdamage);
         }
-        System.out.println(name+" ("+charactersclass+") attacks "+taget.getName()+" with "+weapon.getName()+"!");
-        System.out.println("Raw Attack Damage: "+(damage+weapon.getBaseDamage()));
-        System.out.println(taget.getName()+"'s Defense: "+taget.getDefense()+" (reduces damage by "+taget.getDefense()+")");
-        double finaldamage = (damage+weapon.getBaseDamage())-taget.getDefense();
-        System.out.println("Actual Damage Taken: "+(finaldamage));
-        taget.receiveDamage(finaldamage);
+
     }
 
     public void levelUp(){
@@ -130,17 +136,13 @@ public class Characters implements Destructible {
         System.out.println("Max Health increased to "+maxHealthPoints+" (full heal applied)");
     }
 
+    @Override
     public void receiveDamage(double amount){
         healthPoints-=amount;
         if (healthPoints<=0){
             healthPoints=0;
         }
         System.out.println(name+"'s HP: "+healthPoints+"/"+maxHealthPoints);
-    }
-
-    @Override
-    public void takeDamage(int amount) {
-
     }
 
     @Override

@@ -40,6 +40,10 @@ public class HealthPotion implements Consumable{
 
     @Override
     public void use(Characters user) {
-
+        user.setHealthPoints(user.getHealthPoints()+addAmount);
+        if (user.getHealthPoints()>=user.getMaxHealthPoints()){
+            user.setHealthPoints(user.getMaxHealthPoints());
+        }
+        System.out.println(user.getName()+"'s HP: "+user.getHealthPoints()+"/"+user.getMaxHealthPoints());
     }
 }

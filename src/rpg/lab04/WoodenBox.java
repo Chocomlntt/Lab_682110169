@@ -51,26 +51,38 @@ public class WoodenBox implements Destructible{
         return durability;
     }
 
-    public void setHealthPoints(double durability) {
+    public void setDurability(double durability) {
         this.durability = durability;
     }
 
     @Override
     public void receiveDamage(double amount) {
-
+        setDurability(getDurability()-amount);
+        if (getDurability()<=0){
+            setDurability(0);
+            isDestroyed();
+            System.out.println("Can't attack destroyed "+getName());
+        }
+        System.out.println(name+"'s Durability: "+durability+"/"+maxDurability);
     }
 
     @Override
     public boolean isDestroyed() {
-
-        return false;
+        if (getDurability()<=0) {
+            return true;
+        }else {
+            return false;
+        }
     }
 
     @Override
     public void breakOpen() {
-
+        System.out.println(whenOpen);
     }
 
     public void displayBoxDetails() {
+        System.out.println("\n      --- "+name+" ---");
+        System.out.println("Durability: "+durability+"/"+maxDurability);
+        System.out.println("Is lock: "+isLock);
     }
 }

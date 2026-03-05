@@ -46,9 +46,10 @@ public class EBook extends LibraryItem implements DigitalContent,Taxable {
 
 
     @Override
-    public void calculateTax() {
-        double price = 99.0;
+    public double calculateTax() {
+        double price = getPrice();
         double taxRate = 0.05;
+        return price*taxRate;
     }
 }
 

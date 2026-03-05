@@ -30,16 +30,21 @@ public class Warrior extends Characters {
 
     @Override
     public void attack(Destructible taget){
-        if (taget.getHealthPoints()<=0){
-            System.out.println("Can't attack die character");
-            return;
+        double rawdamage = (((damage + weapon.getBaseDamage())) * 1.5);
+        if (taget instanceof Characters) {
+            if (((Characters) taget).getHealthPoints() <= 0) {
+                System.out.println("Can't attack die character");
+                return;
+            }
+            System.out.println(name + " (" + getCharactersclass() + ") attacks " + ((Characters) taget).getName() + " with " + weapon.getName() + "!");
+            System.out.println("Raw Attack Damage: " + (damage + weapon.getBaseDamage()));
+            System.out.println(((Characters) taget).getName() + "'s Defense: " + ((Characters) taget).getDefense() + " (reduces damage by " + ((Characters) taget).getDefense() + ")");
+            double finaldamage = (((damage + weapon.getBaseDamage()) - ((Characters) taget).getDefense()) * 1.5);
+            System.out.println("Actual Damage Taken: " + (finaldamage) + " (1.5x damage bonus)");
+            taget.receiveDamage(finaldamage);
+        }else {
+            taget.receiveDamage(rawdamage);
         }
-        System.out.println(name+" ("+getCharactersclass()+") attacks "+taget.getName()+" with "+weapon.getName()+"!");
-        System.out.println("Raw Attack Damage: "+(damage+weapon.getBaseDamage()));
-        System.out.println(taget.getName()+"'s Defense: "+taget.getDefense()+" (reduces damage by "+taget.getDefense()+")");
-        double finaldamage =(((damage+weapon.getBaseDamage())-taget.getDefense())*1.5);
-        System.out.println("Actual Damage Taken: "+(finaldamage)+" (1.5x damage bonus)");
-        taget.receiveDamage(finaldamage);
     }
 
     @Override

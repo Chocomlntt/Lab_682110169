@@ -8,7 +8,7 @@ public class CastleGate implements Destructible {
     private double maxDurability;
     private String status;
 
-    public CastleGate(String name,boolean isLocked, boolean isReinforced, double maxDurability) {
+    public CastleGate(String name, double maxDurability,boolean isLocked, boolean isReinforced) {
         this.name=name;
         this.isLocked = isLocked;
         this.isReinforced = isReinforced;
@@ -66,16 +66,31 @@ public class CastleGate implements Destructible {
     }
 
     public void displayGateDetails() {
+        System.out.println("\n      --- "+name+" ---");
+        System.out.println("Durability: "+durability+"/"+maxDurability);
+        System.out.println("Is Locked: "+isLocked);
+        System.out.println("Is Reinforced: "+isReinforced);
+        System.out.println("Status: "+status);
     }
 
     @Override
     public void receiveDamage(double amount) {
-
+        setDurability(getDurability()-amount);
+        if (getDurability()<=0){
+            setDurability(0);
+            isDestroyed();
+            System.out.println("Can't attack destroyed "+getName());
+        }
+        System.out.println(name+"'s Durability: "+durability+"/"+maxDurability);
     }
 
     @Override
     public boolean isDestroyed() {
-        return false;
+        if (getDurability()<=0) {
+            return true;
+        }else {
+            return false;
+        }
     }
 
     @Override
